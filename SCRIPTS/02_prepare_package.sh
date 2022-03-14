@@ -153,16 +153,7 @@ svn co https://github.com/immortalwrt/immortalwrt/branches/master/tools/ucl tool
 # 访问控制
 svn co https://github.com/coolsnowwolf/luci/trunk/applications/luci-app-accesscontrol package/lean/luci-app-accesscontrol
 svn co https://github.com/QiuSimons/OpenWrt-Add/trunk/luci-app-control-weburl package/new/luci-app-control-weburl
-# 广告过滤 Adbyby
-svn co https://github.com/coolsnowwolf/luci/trunk/applications/luci-app-adbyby-plus package/lean/luci-app-adbyby-plus
-svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/adbyby package/lean/adbyby
-# 广告过滤 AdGuard
-#svn co https://github.com/Lienol/openwrt/trunk/package/diy/luci-app-adguardhome package/new/luci-app-adguardhome
-git clone https://github.com/rufengsuixing/luci-app-adguardhome.git package/new/luci-app-adguardhome
 rm -rf ./feeds/packages/net/adguardhome
-svn co https://github.com/openwrt/packages/trunk/net/adguardhome feeds/packages/net/adguardhome
-sed -i '/\t)/a\\t$(STAGING_DIR_HOST)/bin/upx --lzma --best $(GO_PKG_BUILD_BIN_DIR)/AdGuardHome' ./feeds/packages/net/adguardhome/Makefile
-sed -i '/init/d' feeds/packages/net/adguardhome/Makefile
 # Argon 主题
 git clone https://github.com/jerrykuku/luci-theme-argon.git package/new/luci-theme-argon
 wget -P package/new/luci-theme-argon/htdocs/luci-static/argon/background/ https://github.com/QiuSimons/OpenWrt-Add/raw/master/5808303.jpg
@@ -199,13 +190,6 @@ svn co https://github.com/kiddin9/openwrt-packages/trunk/ddns-scripts-dnspod pac
 svn co https://github.com/QiuSimons/OpenWrt_luci-app/trunk/luci-app-tencentddns package/lean/luci-app-tencentddns
 svn co https://github.com/kenzok8/openwrt-packages/trunk/luci-app-aliddns feeds/luci/applications/luci-app-aliddns
 ln -sf ../../../feeds/luci/applications/luci-app-aliddns ./package/feeds/luci/luci-app-aliddns
-# Docker 容器（会导致 OpenWrt 出现 UDP 转发问题，慎用）
-rm -rf ./feeds/luci/applications/luci-app-dockerman
-svn co https://github.com/lisaac/luci-app-dockerman/trunk/applications/luci-app-dockerman feeds/luci/applications/luci-app-dockerman
-rm -rf ./feeds/luci/collections/luci-lib-docker
-svn co https://github.com/lisaac/luci-lib-docker/trunk/collections/luci-lib-docker feeds/luci/collections/luci-lib-docker
-#sed -i 's/+docker/+docker \\\n\t+dockerd/g' ./feeds/luci/applications/luci-app-dockerman/Makefile
-sed -i '/sysctl.d/d' feeds/packages/utils/dockerd/Makefile
 # DiskMan
 mkdir -p package/new/luci-app-diskman && \
 wget https://raw.githubusercontent.com/lisaac/luci-app-diskman/master/applications/luci-app-diskman/Makefile -O package/new/luci-app-diskman/Makefile
@@ -225,26 +209,6 @@ rm -rf ./feeds/luci/applications/luci-app-frps
 rm -rf ./feeds/luci/applications/luci-app-frpc
 rm -rf ./feeds/packages/net/frp
 rm -f ./package/feeds/packages/frp
-svn co https://github.com/coolsnowwolf/luci/trunk/applications/luci-app-frps package/lean/luci-app-frps
-svn co https://github.com/coolsnowwolf/luci/trunk/applications/luci-app-frpc package/lean/luci-app-frpc
-svn co https://github.com/coolsnowwolf/packages/trunk/net/frp package/lean/frp
-# IPSec
-svn co https://github.com/coolsnowwolf/luci/trunk/applications/luci-app-ipsec-vpnd package/lean/luci-app-ipsec-vpnd
-# IPv6 兼容助手
-svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/ipv6-helper package/lean/ipv6-helper
-# 京东签到 By Jerrykuku
-git clone --depth 1 https://github.com/jerrykuku/node-request.git package/new/node-request
-git clone --depth 1 https://github.com/jerrykuku/luci-app-jd-dailybonus.git package/new/luci-app-jd-dailybonus
-# MentoHUST
-git clone --depth 1 https://github.com/BoringCat/luci-app-mentohust package/new/luci-app-mentohust
-git clone --depth 1 https://github.com/KyleRicardo/MentoHUST-OpenWrt-ipk package/new/MentoHUST
-# Mosdns
-#svn co https://github.com/immortalwrt/packages/trunk/net/mosdns feeds/packages/net/mosdns
-#ln -sf ../../../feeds/packages/net/mosdns ./package/feeds/packages/mosdns
-#sed -i '/config.yaml/d' feeds/packages/net/mosdns/Makefile
-#sed -i '/mosdns-init-openwrt/d' feeds/packages/net/mosdns/Makefile
-svn co https://github.com/QiuSimons/openwrt-mos/trunk/mosdns package/new/mosdns
-svn co https://github.com/QiuSimons/openwrt-mos/trunk/luci-app-mosdns package/new/luci-app-mosdns
 svn co https://github.com/QiuSimons/openwrt-mos/trunk/v2ray-geodata package/new/v2ray-geodata
 # 流量监管
 svn co https://github.com/coolsnowwolf/luci/trunk/applications/luci-app-netdata package/lean/luci-app-netdata
@@ -288,22 +252,6 @@ svn co https://github.com/xiaorouji/openwrt-passwall/trunk/brook package/new/bro
 svn co https://github.com/QiuSimons/OpenWrt-Add/trunk/trojan-plus package/new/trojan-plus
 svn co https://github.com/xiaorouji/openwrt-passwall/trunk/ssocks package/new/ssocks
 svn co https://github.com/xiaorouji/openwrt-passwall/trunk/hysteria package/new/hysteria
-# qBittorrent 下载
-svn co https://github.com/coolsnowwolf/luci/trunk/applications/luci-app-qbittorrent package/lean/luci-app-qbittorrent
-svn co https://github.com/coolsnowwolf/packages/trunk/net/qBittorrent-static package/lean/qBittorrent-static
-svn co https://github.com/coolsnowwolf/packages/trunk/net/qBittorrent package/lean/qBittorrent
-svn co https://github.com/coolsnowwolf/packages/trunk/libs/qtbase package/lean/qtbase
-svn co https://github.com/coolsnowwolf/packages/trunk/libs/qttools package/lean/qttools
-svn co https://github.com/coolsnowwolf/packages/trunk/libs/rblibtorrent package/lean/rblibtorrent
-# 清理内存
-svn co https://github.com/coolsnowwolf/luci/trunk/applications/luci-app-ramfree package/lean/luci-app-ramfree
-# ServerChan 微信推送
-git clone -b master --depth 1 https://github.com/tty228/luci-app-serverchan.git package/new/luci-app-serverchan
-# SmartDNS
-rm -rf ./feeds/packages/net/smartdns
-svn co https://github.com/Lienol/openwrt-packages/trunk/net/smartdns feeds/packages/net/smartdns
-rm -rf ./feeds/luci/applications/luci-app-smartdns
-svn co https://github.com/immortalwrt/luci/branches/openwrt-18.06/applications/luci-app-smartdns feeds/luci/applications/luci-app-smartdns
 # ShadowsocksR Plus+ 依赖
 rm -rf ./feeds/packages/net/kcptun
 rm -rf ./feeds/packages/net/shadowsocks-libev
@@ -357,8 +305,6 @@ popd
 git clone --depth 1 https://github.com/zxlhhyccc/luci-app-v2raya.git package/new/luci-app-v2raya
 svn co https://github.com/openwrt/packages/trunk/net/v2raya feeds/packages/net/v2raya
 ln -sf ../../../feeds/packages/net/v2raya ./package/feeds/packages/v2raya
-# socat
-svn co https://github.com/Lienol/openwrt-package/trunk/luci-app-socat package/new/luci-app-socat
 # 订阅转换
 svn co https://github.com/immortalwrt/packages/trunk/net/subconverter feeds/packages/net/subconverter
 sed -i '\/bin\/subconverter/a\\t$(STAGING_DIR_HOST)/bin/upx --lzma --best $(1)/usr/bin/subconverter' feeds/packages/net/subconverter/Makefile
@@ -375,26 +321,6 @@ svn co https://github.com/immortalwrt/packages/trunk/libs/toml11 feeds/packages/
 ln -sf ../../../feeds/packages/libs/toml11 ./package/feeds/packages/toml11
 # 网易云音乐解锁
 git clone --depth 1 https://github.com/immortalwrt/luci-app-unblockneteasemusic.git package/new/UnblockNeteaseMusic
-# USB 打印机
-svn co https://github.com/coolsnowwolf/luci/trunk/applications/luci-app-usb-printer package/lean/luci-app-usb-printer
-# UU加速器
-svn co https://github.com/coolsnowwolf/luci/trunk/applications/luci-app-uugamebooster package/lean/luci-app-uugamebooster
-svn co https://github.com/coolsnowwolf/packages/trunk/net/uugamebooster package/lean/uugamebooster
-# KMS 激活助手
-svn co https://github.com/coolsnowwolf/luci/trunk/applications/luci-app-vlmcsd package/lean/luci-app-vlmcsd
-svn co https://github.com/coolsnowwolf/packages/trunk/net/vlmcsd package/lean/vlmcsd
-# VSSR
-git clone -b master --depth 1 https://github.com/jerrykuku/luci-app-vssr.git package/lean/luci-app-vssr
-git clone -b master --depth 1 https://github.com/jerrykuku/lua-maxminddb.git package/lean/lua-maxminddb
-pushd package/lean/luci-app-vssr
-sed -i 's,default n,default y,g' Makefile
-sed -i '/trojan-go/d' Makefile
-sed -i '/v2ray-core/d' Makefile
-sed -i '/v2ray-plugin/d' Makefile
-sed -i '/xray-plugin/d' Makefile
-sed -i 's,+shadowsocks-libev-ss-local ,,g' Makefile
-popd
-sed -i '/result.encrypt_method/a\result.fast_open = "1"' package/lean/luci-app-vssr/root/usr/share/vssr/subscribe.lua
 sed -i 's,ispip.clang.cn/all_cn.txt,raw.sevencdn.com/QiuSimons/Chnroute/master/dist/chnroute/chnroute.txt,g' package/lean/luci-app-vssr/luasrc/controller/vssr.lua
 sed -i 's,ispip.clang.cn/all_cn.txt,raw.sevencdn.com/QiuSimons/Chnroute/master/dist/chnroute/chnroute.txt,g' package/lean/luci-app-vssr/root/usr/share/vssr/update.lua
 # 网络唤醒
